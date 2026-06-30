@@ -1,213 +1,71 @@
+# 🏥 MING 医疗对话助手
 
+基于 **Qwen1.5-1.8B-Chat** + **MING-MOE 医疗 LoRA** 的中文医疗问答助手，支持流式输出 + Gradio Web 界面。
 
-# 明医 (MING)：中文医疗问诊大模型
+> ⚠️ 本助手仅供学习参考，**不能替代专业医生诊断**。
 
-<p align="center">
-  <img src=".\img\bgimage.png" width=800px/>
-</p>
+## ✨ 效果预览
 
+（这里贴一张你刚才聊天的截图）
 
-<div align="center"><img src="https://img.shields.io/badge/Version-1.3--alpha-brightgreen"> <img src="https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg"> <img src="https://img.shields.io/badge/python-3.9+-blue.svg"></div>
+## 🛠 硬件要求
 
-## 🌐项目简介
+- **显卡**：NVIDIA GPU，显存 ≥ 4GB（实测 RTX 4050 6GB 完美运行）
+- **内存**：≥ 8GB
+- **系统**：Windows / Linux
 
-本项目开源了基于医疗指令微调的中文医疗问诊模型：**明医 (MING)**。目前模型的主要功能如下：
+## 📦 环境安装
 
-<!DOCTYPE html>
-<html>
-<body>
-<table style="width: 100%;">
-  <tr style="border-collapse: collapse; border: transparent;">
-      <td style="width: 50%; border-collapse: collapse;border: transparent;"><img src=".\img\demo1.gif" alt="demo1"/></td>
-      <td style="width: 50%; border-collapse: collapse;border: transparent;"><img src=".\img\demo2.gif" alt="demo2"/></td>
-  </tr>
-  <tr style="border-collapse: collapse; border: transparent;">
-      <td style="width: 50%; border-collapse: collapse;border: transparent;" ><div align="center"><strong>医疗问答</strong>：对医疗问题进行解答，对案例进行分析。</div></td>
-      <td style="width: 50%; border-collapse: collapse;border: transparent;"><div align="center"><strong>智能问诊</strong>：多轮问诊后给出诊断结果和建议。</div></td>
-  </tr>
-</table>
-</body>
-</html>
+### 1. 创建 conda 环境
+\`\`\`bash
+conda create -n ming python=3.10 -y
+conda activate ming
+\`\`\`
 
-## 📄相关论文
-* MING-MOE技术报告: MING-MOE: Enhancing Medical Multi-Task Learning in Large Language Models with Sparse Mixture of Low-Rank Adapter Experts] [[paper](https://arxiv.org/pdf/2404.09027.pdf)]
+### 2. 安装 PyTorch (CUDA 11.8)
+\`\`\`bash
+pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 torchaudio==2.1.2+cu118 -f https://mirrors.aliyun.com/pytorch-wheels/cu118/
+\`\`\`
 
-* 基于多智能体交互的大语言模型多轮问诊自动评估框架: Automatic Interactive Evaluation for Large Language Models with State Aware Patient Simulator [[paper](https://arxiv.org/pdf/2403.08495.pdf)][[code](https://github.com/BlueZeros/Automatic_Interactive_Evaluation)]
+### 3. 安装其他依赖
+\`\`\`bash
+pip install -r requirements.txt
+\`\`\`
 
-* 二阶段解耦学习的临床大模型对齐方法: MEDCARE: Advancing Medical LLMs through Decoupling Clinical Alignment and Knowledge Aggregation [[paper](https://arxiv.org/pdf/2406.17484v3)] [[code](https://github.com/BlueZeros/MedCare)]
+## 📥 下载模型
 
-* 基于工具自适应学习与反思的医学智能体和多维度评估基准: ReflecTool: Towards Reflection-Aware Tool-Augmented Clinical Agents [[paper](https://arxiv.org/abs/2410.17657)] [[code](https://github.com/BlueZeros/ReflecTool)]
+### 基座模型 Qwen1.5-1.8B-Chat
+从 [HF Mirror](https://hf-mirror.com/Qwen/Qwen1.5-1.8B-Chat) 或 [ModelScope](https://modelscope.cn/models/qwen/Qwen1.5-1.8B-Chat) 下载，放到 `models/Qwen1.5-1.8B-Chat/`
 
-## 💫更新
-* 🔥 [2024/04/14] 开源了基于Qwen1.5指令微调的专家混合模型MING-MOE
+### MING 医疗 LoRA
+从 [HF Mirror](https://hf-mirror.com/BlueZeros/MING-MOE-1.8B) 下载，放到 `models/MING-MOE-1.8B/`
 
-* [2024/03/14] 开源了基于Qwen1.5-1.8b指令微调的MING-1.8B
+最终目录结构：
+\`\`\`
+medicine-MING/
+├── models/
+│   ├── Qwen1.5-1.8B-Chat/         # 基座模型
+│   └── MING-MOE-1.8B/             # 医疗 LoRA
+├── start_med_chat.py              # 启动脚本
+├── requirements.txt
+└── README.md
+\`\`\`
 
-* [2023/07/25] 开源了基于bloomz-7b指令微调的MING-7B
+## 🚀 运行
 
-* [2023/07/25] MedicalGPT-zh更名为**MING**
+修改 `start_med_chat.py` 中的模型路径后：
 
-  
+\`\`\`bash
+python start_med_chat.py
+\`\`\`
 
-##  🔬开源模型
+浏览器自动打开 `http://127.0.0.1:7860` 即可对话。
 
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-<table style="width: 80%;">
-  <tr>
-      <td style="width: 20%;"><div align="center"><strong>模型</strong></div></td>
-      <td style="width: 20%;"><div align="center"><strong>基座</strong></div></td>
-      <td style="width: 30%;"><div align="center"><strong>HuggingFace</strong></div></td>
-  </tr>
-  
-  <tr>
-      <td><center>MING-7B</center></td>
-      <td><center><a href="https://huggingface.co/bigscience/bloomz-7b1-mt">bloomz-7b1-mt</a></center></td>
-      <td><center>🤗<a href="https://huggingface.co/BlueZeros/MING-7B">MING-7B</a></center></td>
-  </tr>
+## 💡 致谢
 
-  <tr>
-      <td><center>MING-1.8B</center></td>
-      <td><center><a href="https://huggingface.co/Qwen/Qwen1.5-1.8B-Chat">Qwen1.5-1.8B</a></center></td>
-      <td><center>🤗<a href="https://huggingface.co/BlueZeros/MING-1.8B">MING-1.8B</a></center></td>
-  </tr>
+- 基座模型：[Qwen1.5-1.8B-Chat](https://github.com/QwenLM/Qwen1.5)
+- 医疗 LoRA：[MING](https://github.com/MediaBrain-SJTU/MING)
 
-  <tr>
-      <td><center>MING-MOE-1.8B</center></td>
-      <td><center><a href="https://huggingface.co/Qwen/Qwen1.5-1.8B-Chat">Qwen1.5-1.8B</a></center></td>
-      <td><center>🤗<a href="https://huggingface.co/BlueZeros/MING-MOE-1.8B">MING-MOE-1.8B</a></center></td>
-  </tr>
+## 📄 License
 
-  <tr>
-      <td><center>MING-MOE-4B</center></td>
-      <td><center><a href="https://huggingface.co/Qwen/Qwen1.5-4B-Chat">Qwen1.5-4B</a></center></td>
-      <td><center>🤗<a href="https://huggingface.co/BlueZeros/MING-MOE-4B">MING-MOE-4B</a></center></td>
-  </tr>
-
-  <tr>
-      <td><center>MING-MOE-7B</center></td>
-      <td><center><a href="https://huggingface.co/Qwen/Qwen1.5-7B-Chat">Qwen1.5-7B</a></center></td>
-      <td><center>🤗<a href="https://huggingface.co/BlueZeros/MING-MOE-7B">MING-MOE-7B</a></center></td>
-  </tr>
-
-  <tr>
-      <td><center>MING-MOE-14B</center></td>
-      <td><center><a href="https://huggingface.co/Qwen/Qwen1.5-14B-Chat">Qwen1.5-14B</a></center></td>
-      <td><center>🤗<a href="https://huggingface.co/BlueZeros/MING-MOE-14B">MING-MOE-14B</a></center></td>
-  </tr>
-</table>
-</body>
-</html>
-
-
-## ⚡快速开始
-
-1. 配置环境（测试环境如下，具体版本可以根据实际需求配置）
-
-   * python==3.9.16
-   * pytorch==2.0.1+cu117
-   * peft==0.9.0
-
-2. 安装项目依赖 
-
-   ```bash
-   git clone https://github.com/MediaBrain-SJTU/MING
-   cd MING
-   pip install -e .
-   ```
-
-2. 下载模型参数并运行（要求单卡显存 >= 15G）
-    * MING-MOE
-   ```bash
-   CUDA_VISIBLE_DEVICES=0 python -m ming/serve/cli.py \
-       --model_path {path_to_checkpoint} \ # 模型路径
-       --model_base {path_to_base_model} \ # 基座模型路径
-       --max_new_token 3072 # 输出最大长度
-   ```
-
-   * MING-1.8B
-   ```bash
-   CUDA_VISIBLE_DEVICES=0 python -m ming/serve/cli.py \
-       --model_path {path_to_checkpoint} \ # 模型路径
-       --max_new_token 2048 # 输出最大长度
-   ```
-
-   * MING-7B
-   ```bash
-   CUDA_VISIBLE_DEVICES=0 python -m ming/serve/cli.py \
-       --model_path {path_to_checkpoint} \ # 模型路径
-       --conv_template bloom \ # prompt
-       --max_new_token 512 \ # 输出最大长度
-       --beam_size 3 \ # beam search宽度
-       --temperature 1.2 # 采样温度
-   ```
-   
-   * 注：由于transformers库的问题，当beam-size > 1时，需要满足temperature>=1.0，否则会报错。
-
-4. 命令行运行实例
-
-   * 对话支持多轮
-
-   * 对话中输入关键词 `new chat` 能够开启新一轮对话。
-
-
-## 🧭测试样例
-<p align="center">
-  <img src=".\img\case1.png" width=800px/>
-</p>
-
-<p align="center">
-  <img src=".\img\case2.png" width=800px/>
-</p>
-
-
-
-## 🪶贡献
-
-本项目由上海交通大学未来媒体网络协同创新中心和上海人工智能实验室智慧医疗中心合作研发。模型数据系统主要由廖育生，江书洋，刘泓呈，孟昱同完成，指导教师为[王钰](https://mediabrain.sjtu.edu.cn/yuwang/)副教授。
-
-
-
-## 免责声明
-
-预训练模型是基于大量语料库和算法模型进行训练的，并且在训练过程中可能存在偏差、错误和不完整的信息。因此，本项目提供的预训练模型仅供参考和研究使用，并不能保证其准确性和可靠性。使用预训练模型产生的结果可能存在误差和偏差，不能用于实际应用或决策。本项目不对使用预训练模型所产生的结果承担任何责任，也不对因使用预训练模型所产生的任何损失承担责任。使用者在使用预训练模型时应自行承担风险并进行自我验证。
-
-
-
-## 引用
-
-如果你使用了本项目的数据或者代码，请声明引用
-```latex
-@inproceedings{liao2024medcare,
-  title={MedCare: Advancing Medical LLMs through Decoupling Clinical Alignment and Knowledge Aggregation},
-  author={Liao, Yusheng and Jiang, Shuyang and Chen, Zhe and Wang, Yu and Wang, Yanfeng},
-  booktitle={Findings of the Association for Computational Linguistics: EMNLP 2024},
-  pages={10562--10581},
-  year={2024}
-}
-```
-
-
-```latex
-@article{liao2024ming,
-  title={MING-MOE: Enhancing Medical Multi-Task Learning in Large Language Models with Sparse Mixture of Low-Rank Adapter Experts},
-  author={Liao, Yusheng and Jiang, Shuyang and Wang, Yu and Wang, Yanfeng},
-  journal={arXiv preprint arXiv:2404.09027},
-  year={2024}
-}
-```
-
-```latex
-@misc{MING,
-  author={Yusheng Liao, Yutong Meng, Hongcheng Liu, Yu Wang, Yanfeng Wang},
-  title = {明医 (MING)：中文医疗问诊大模型},
-  year = {2023},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/MediaBrain-SJTU/MING}},
-}
-```
-
+仅供学习交流使用。

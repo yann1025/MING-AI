@@ -44,14 +44,9 @@ pip install -r requirements.txt
 
 最终目录结构：
 \`\`\`
-medicine-MING/
-├── models/
-│   ├── Qwen1.5-1.8B-Chat/         # 基座模型
-│   └── MING-MOE-1.8B/             # 医疗 LoRA
-├── start_med_chat.py              # 启动脚本
-├── requirements.txt
-└── README.md
-\`\`\`
+
+<img width="554" height="209" alt="image" src="https://github.com/user-attachments/assets/744c5e05-8bc2-4552-a9ef-691a335c822b" />
+
 
 ## 🚀 运行
 

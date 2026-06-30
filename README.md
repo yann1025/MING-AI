@@ -6,7 +6,9 @@
 
 ## ✨ 效果预览
 
-（这里贴一张你刚才聊天的截图）
+<img width="1911" height="912" alt="image" src="https://github.com/user-attachments/assets/8e616c92-a603-4fbe-97f8-efd5c554434c" />
+<img width="1591" height="918" alt="image" src="https://github.com/user-attachments/assets/99d67f07-d984-4bd2-9b42-088cf916583e" />
+
 
 ## 🛠 硬件要求
 

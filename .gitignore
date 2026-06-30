@@ -1,3 +1,54 @@
-# 忽略 temp 目录下的所有文件
-ming.egg-info/
-img/
+# ============ 模型文件============
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.gguf
+
+# ============ Python ============
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+
+# ============ 虚拟环境 ============
+venv/
+env/
+ENV/
+.venv/
+
+# ============ IDE ============
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============ 日志/缓存 ============
+*.log
+.cache/
+logs/
+outputs/
+checkpoints/
+wandb/
+gradio_cached_examples/
+
+# ============ 系统文件 ============
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============ Jupyter ============
+.ipynb_checkpoints/
+
+# ============ 临时文件 ============
+*.tmp
+*.bak
